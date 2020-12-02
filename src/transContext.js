@@ -8,7 +8,7 @@ const initial_Transactions= [
 
 export const transactionContext = createContext (initial_Transactions)
 
-export const TransactionProvider=({})=>{
+export const TransactionProvider=({children})=>{
     let [state,dispatch]=useReducer(transReducer,initial_Transactions)
     console.log("state")
     function addTransaction(transObj){
@@ -21,8 +21,10 @@ export const TransactionProvider=({})=>{
         })
     }
     return <transactionContext.Provider value={{
-        transactions:state
+        transactions:state,
+        addTransaction
     }}>
+        {children}
 
     </transactionContext.Provider>
 
