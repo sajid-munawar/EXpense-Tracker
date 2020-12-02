@@ -10,7 +10,6 @@ export const transactionContext = createContext (initial_Transactions)
 
 export const TransactionProvider=({children})=>{
     let [state,dispatch]=useReducer(transReducer,initial_Transactions)
-    console.log("state")
     function addTransaction(transObj){
         dispatch({
             type:"Add_Transaction",
