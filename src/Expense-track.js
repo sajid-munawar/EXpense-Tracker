@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {transaction} from "./transContext"
 function ExpenseTrack(){
-    const transactions= [
-        {amount:500, desc:"camera"},
-        {amount:200, desc:"book"},
-        {amount:300, desc:"Bike"}
-    ]
+    let transactions=useContext(transaction)
+    
     return <div className="app-container">
         <h1>Expense Track</h1>
         <h3 className="balance">Your Balance <br/>$500</h3>
