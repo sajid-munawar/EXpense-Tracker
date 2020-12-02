@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import {transaction} from "./transContext"
+import {transactionContext} from "./transContext"
 function ExpenseTrack(){
-    let transactions=useContext(transaction)
+    let transactions=useContext(transactionContext)
     
     return <div className="app-container">
         <h1>Expense Track</h1>
@@ -13,7 +13,7 @@ function ExpenseTrack(){
         <h3>History</h3> <hr/>
         <ul className="transaction-list">
             {transactions.map ((transObj,ind)=>{
-                return <li>
+                return <li key={ind}>
                 <span>{transObj.desc}</span>
                 <span>${transObj.amount}</span>
             </li>
