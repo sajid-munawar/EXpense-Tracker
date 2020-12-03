@@ -1,42 +1,15 @@
-import React, { useContext, useState } from 'react'
-import {transactionContext} from "./transContext";
+import React, { useContext } from 'react';
+import {transaction} from "./transContext"
 
-function ExpenseTrack(){
-    let {transactions,addTransaction}=useContext(transactionContext)
-    let [newDesc,setDesc]=useState("")
-    let [newAmount,setAmount]=useState(0)
-
-    function getIncome(){
-        let income=0;
-        for (var i=0;i < transactions.length; i++){
-            if (transactions[i].amount>0){
-                income+=transactions[i].amount
-            }
-        }return income;
-    }
-    function getExpense(){
-        let income=0;
-        for (var i=0;i < transactions.length; i++){
-            if (transactions[i].amount<0){
-                income+=transactions[i].amount
-            }
-        }return income;
-    }
-
-    const handleAddition=((ev)=>{
-        ev.preventDefault()
-        addTransaction({
-            amount:Number( newAmount),
-            desc:newDesc
-        })
-    })
+function ExpenseTrack(){  
+    let transactions=useContext(transaction)
     
     return <div className="app-container">
         <h1>Expense Track</h1>
-        <h3 className="balance">Your Balance <br/>${getIncome()+ getExpense()}</h3>
+        <h3 className="balance">Your Balance <br/>$509</h3>
         <div className="expense-container">
-            <h4>IONCOME <br/>${getIncome()}</h4>
-            <h4>EXPENSE <br/>${getExpense()}</h4>
+            <h4>IONCOME <br/>$700</h4>
+            <h4>EXPENSE <br/>$200</h4>
         </div>
         <h3>History</h3> <hr/>
         <ul className="transaction-list">
@@ -48,14 +21,14 @@ function ExpenseTrack(){
             })}
         </ul>
         <h3 className="add">Add new transaction</h3>
-        <form className="form" onSubmit={handleAddition}>
+        <form className="form">
             <label>
                 Description <br/>
-                <input type="text" onChange={(ev)=>setDesc(ev.target.value)}/>
+                <input type="text"/>
             </label>
             <label>
                 Amount <br/>
-                <input type="number" onChange={(ev)=>setAmount(ev.target.value)}/>
+                <input type="number"/>
             </label>
             <label>
                 <input type="submit"  />
