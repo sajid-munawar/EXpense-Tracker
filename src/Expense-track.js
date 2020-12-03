@@ -6,20 +6,38 @@ function ExpenseTrack(){
     let [newDesc,setDesc]=useState("")
     let [newAmount,setAmount]=useState(0)
 
+    function getIncome(){
+        let income=0;
+        for (var i=0;i<transactions.length;i++){
+            if(transactions[i].amount>0){
+                income+=transactions[i].amount
+            }
+        }return income
+    }
+
+    function getexpense(){
+        let expense=0;
+        for (var i=0;i<transactions.length;i++){
+            if(transactions[i].amount<0){
+                expense+=transactions[i].amount
+            }
+        }return expense
+    }
+
     const handleAddition=((ev)=>{
         ev.preventDefault()
         addTransaction({
-            amount:newAmount,
+            amount:Number( newAmount),
             desc:newDesc
         })
     })
     
     return <div className="app-container">
         <h1>Expense Track</h1>
-        <h3 className="balance">Your Balance <br/>$509</h3>
+        <h3 className="balance">Your Balance <br/>${getIncome()+getexpense()}</h3>
         <div className="expense-container">
-            <h4>IONCOME <br/>$700</h4>
-            <h4>EXPENSE <br/>$200</h4>
+            <h4>IONCOME <br/>${getIncome()}</h4>
+            <h4>EXPENSE <br/>${getexpense()}</h4>
         </div>
         <h3>History</h3> <hr/>
         <ul className="transaction-list">
