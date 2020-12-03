@@ -1,11 +1,12 @@
 import './App.css';
 import ExpenseTrack from "./Expense-track";
+import {TransactionProvider} from "./transContext"
 
 function App() {
   return (
-    <div>
+    <TransactionProvider>
       <ExpenseTrack/>
-    </div>
+    </TransactionProvider>
   );
 }
 

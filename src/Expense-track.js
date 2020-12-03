@@ -1,8 +1,18 @@
-import React, { useContext } from 'react';
-import {transaction} from "./transContext"
+import React, { useContext, useState } from 'react';
+import {transactionContext} from "./transContext"
 
 function ExpenseTrack(){  
-    let transactions=useContext(transaction)
+    let {transactions,addTransaction}=useContext(transactionContext)
+    let [newDesc,setDesc]=useState("")
+    let [newAmount,setAmount]=useState(0)
+
+    const handleAddition=((ev)=>{
+        ev.preventDefault()
+        addTransaction({
+            amount:newAmount,
+            desc:newDesc
+        })
+    })
     
     return <div className="app-container">
         <h1>Expense Track</h1>
@@ -21,14 +31,14 @@ function ExpenseTrack(){
             })}
         </ul>
         <h3 className="add">Add new transaction</h3>
-        <form className="form">
+        <form className="form" onSubmit={handleAddition}>
             <label>
                 Description <br/>
-                <input type="text"/>
+                <input type="text" onChange={(ev)=>setDesc(ev.target.value)} />
             </label>
             <label>
                 Amount <br/>
-                <input type="number"/>
+                <input type="number" onChange={(ev)=>setAmount(ev.target.value)}/>
             </label>
             <label>
                 <input type="submit"  />
